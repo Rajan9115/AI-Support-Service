@@ -1,5 +1,6 @@
+import cookieParser from "cookie-parser";
 import cors from "cors";
-import express, { type Express } from "express";
+import express, { type Express, type Router } from "express";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import type { Logger } from "pino";
@@ -17,6 +18,11 @@ export interface CreateAppOptions {
   allowedOrigins: string[];
   readinessChecks: ReadinessChecks;
   rateLimitMax?: number;
+  v1Routers?: {
+    auth: Router;
+    organizations: Router;
+    projects: Router;
+  };
 }
 
 export function createApp(options: CreateAppOptions): Express {
@@ -57,10 +63,17 @@ export function createApp(options: CreateAppOptions): Express {
     }),
   );
 
+  app.use(cookieParser());
   app.use(express.json({ limit: "1mb" }));
   app.use(express.urlencoded({ extended: false, limit: "1mb" }));
 
   app.use(createHealthRouter(options.readinessChecks));
+
+  if (options.v1Routers) {
+    app.use("/v1/auth", options.v1Routers.auth);
+    app.use("/v1/organizations", options.v1Routers.organizations);
+    app.use("/v1/projects", options.v1Routers.projects);
+  }
 
   app.use(notFoundMiddleware);
   app.use(createErrorHandlerMiddleware(options.logger));
