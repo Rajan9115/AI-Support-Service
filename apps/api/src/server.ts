@@ -1,6 +1,7 @@
 import type { Server } from "node:http";
 import { createApp } from "./app.js";
 import { getAllowedDashboardOrigins, loadApiEnv } from "./config/env.js";
+import { createMongooseRepositories, createV1Modules } from "./container.js";
 import { createMongoLifecycle } from "./infrastructure/database/mongo.js";
 import { createLogger } from "./infrastructure/logger/logger.js";
 import { createRedisLifecycle } from "./infrastructure/redis/redis.js";
@@ -14,12 +15,23 @@ async function startServer(): Promise<void> {
   await mongo.connect();
   await redis.connect();
 
+  const v1 = createV1Modules({
+    repositories: createMongooseRepositories(),
+    sessionSecret: env.SESSION_SECRET,
+    isProduction: env.NODE_ENV === "production",
+  });
+
   const app = createApp({
     logger,
     allowedOrigins: getAllowedDashboardOrigins(env),
     readinessChecks: {
       checkMongo: mongo.isReady,
       checkRedis: redis.isReady,
+    },
+    v1Routers: {
+      auth: v1.authRouter,
+      organizations: v1.organizationRouter,
+      projects: v1.projectRouter,
     },
   });
 
