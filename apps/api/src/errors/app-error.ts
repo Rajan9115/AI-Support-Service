@@ -58,7 +58,9 @@ export function unauthenticatedError(message: string = "Authentication required.
   });
 }
 
-export function rateLimitedError(message: string = "Too many requests. Please try again later."): AppError {
+export function rateLimitedError(
+  message: string = "Too many requests. Please try again later.",
+): AppError {
   return new AppError({
     code: ERROR_CODES.RATE_LIMITED,
     message,
@@ -80,7 +82,10 @@ export function dependencyUnavailableError(
   });
 }
 
-export function internalError(message: string = "An unexpected error occurred.", cause?: unknown): AppError {
+export function internalError(
+  message: string = "An unexpected error occurred.",
+  cause?: unknown,
+): AppError {
   return new AppError({
     code: ERROR_CODES.INTERNAL_ERROR,
     message,
