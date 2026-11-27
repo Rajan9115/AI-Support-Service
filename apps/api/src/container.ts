@@ -1,7 +1,4 @@
-import {
-  createRequireAuthMiddleware,
-  createRequireTenantMiddleware,
-} from "./middleware/auth.js";
+import { createRequireAuthMiddleware, createRequireTenantMiddleware } from "./middleware/auth.js";
 import { AuthService } from "./modules/auth/auth.service.js";
 import { createAuthRouter } from "./modules/auth/auth.routes.js";
 import { OrganizationService } from "./modules/organizations/organization.service.js";
