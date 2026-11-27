@@ -74,7 +74,7 @@ export function createProjectRouter(params: {
     async (req: Request, res: Response) => {
       const project = await params.projectService.getProject(
         req.tenant!.organizationId,
-        req.params.projectId!,
+        req.params.projectId as string,
       );
       sendSuccess(res, project);
     },
@@ -87,7 +87,7 @@ export function createProjectRouter(params: {
     async (req: Request, res: Response) => {
       const project = await params.projectService.updateProject(
         req.tenant!.organizationId,
-        req.params.projectId!,
+        req.params.projectId as string,
         req.auth!.userId,
         req.body,
         req.requestId,
@@ -103,7 +103,7 @@ export function createProjectRouter(params: {
     async (req: Request, res: Response) => {
       await params.projectService.deleteProject(
         req.tenant!.organizationId,
-        req.params.projectId!,
+        req.params.projectId as string,
         req.auth!.userId,
         req.requestId,
       );
@@ -118,7 +118,7 @@ export function createProjectRouter(params: {
     async (req: Request, res: Response) => {
       const keys = await params.projectService.listApiKeys(
         req.tenant!.organizationId,
-        req.params.projectId!,
+        req.params.projectId as string,
       );
       sendSuccess(res, keys);
     },
@@ -131,7 +131,7 @@ export function createProjectRouter(params: {
     async (req: Request, res: Response) => {
       const created = await params.projectService.createApiKey(
         req.tenant!.organizationId,
-        req.params.projectId!,
+        req.params.projectId as string,
         req.auth!.userId,
         req.body,
         req.requestId,
@@ -147,8 +147,8 @@ export function createProjectRouter(params: {
     async (req: Request, res: Response) => {
       const revoked = await params.projectService.revokeApiKey(
         req.tenant!.organizationId,
-        req.params.projectId!,
-        req.params.keyId!,
+        req.params.projectId as string,
+        req.params.keyId as string,
         req.auth!.userId,
         req.requestId,
       );
