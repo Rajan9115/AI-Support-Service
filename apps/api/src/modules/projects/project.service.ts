@@ -7,7 +7,11 @@ import type {
   ProjectRecord,
   ProjectRepository,
 } from "../../repositories/types.js";
-import { generateProjectApiKey, generatePublicProjectId, sha256Hex } from "../../security/crypto.js";
+import {
+  generateProjectApiKey,
+  generatePublicProjectId,
+  sha256Hex,
+} from "../../security/crypto.js";
 
 export interface PublicApiKeyView {
   id: string;
