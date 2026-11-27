@@ -158,7 +158,10 @@ export class MongooseSessionRepository implements SessionRepository {
 
 export class MongooseOrganizationRepository implements OrganizationRepository {
   async create(input: { name: string; slug: string }): Promise<OrganizationRecord> {
-    const doc = await OrganizationModel.create({ name: input.name, slug: input.slug.toLowerCase() });
+    const doc = await OrganizationModel.create({
+      name: input.name,
+      slug: input.slug.toLowerCase(),
+    });
     return toOrganizationRecord(doc);
   }
 
