@@ -1,8 +1,4 @@
-import {
-  conflictError,
-  forbiddenError,
-  unauthenticatedError,
-} from "../../errors/app-error.js";
+import { conflictError, forbiddenError, unauthenticatedError } from "../../errors/app-error.js";
 import type {
   AuditLogRepository,
   OrganizationRepository,
