@@ -1,10 +1,5 @@
-import { ERROR_CODES } from "@resolveai/shared";
+export { createApp, type CreateAppOptions } from "./app.js";
+export { getAllowedDashboardOrigins, loadApiEnv } from "./config/env.js";
+export { AppError } from "./errors/app-error.js";
 
 export const API_SERVICE_NAME = "resolveai-api";
-
-export function getApiFoundationInfo(): { service: string; defaultErrorCode: string } {
-  return {
-    service: API_SERVICE_NAME,
-    defaultErrorCode: ERROR_CODES.INTERNAL_ERROR,
-  };
-}
