@@ -23,7 +23,9 @@ export function sendSuccess<T>(
   statusCode: number = 200,
   meta?: Record<string, unknown>,
 ): Response<SuccessEnvelope<T>> {
-  const payload: SuccessEnvelope<T> = meta ? { success: true, data, meta } : { success: true, data };
+  const payload: SuccessEnvelope<T> = meta
+    ? { success: true, data, meta }
+    : { success: true, data };
   return res.status(statusCode).json(payload);
 }
 
