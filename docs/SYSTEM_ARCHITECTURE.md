@@ -38,11 +38,13 @@ resolveai/
 ## 4. Key Request Flows
 
 ### 4.1 Asynchronous Knowledge Ingestion
+
 1. Dashboard uploads a file or submits a URL/FAQ to `apps/api`.
 2. API validates metadata, file signature/size, and tenant ownership, stores original files in private object storage, creates a `Document` record (`pending`), and enqueues an idempotent BullMQ job.
 3. Worker fetches the source, parses/crawls (with SSRF protection), normalizes text, deduplicates via content hash, chunks text (~700 tokens, 100 overlap baseline), generates embeddings via the AI provider, persists `DocumentChunk` records, and marks the document `completed` (or `failed` with safe actionable status).
 
 ### 4.2 Runtime Chat & RAG
+
 1. Widget/SDK exchanges a public project identifier (and origin check) for a short-lived, project-scoped runtime session token.
 2. Client sends a message to `POST /v1/runtime/chat` (or `/stream`).
 3. API resolves tenant, project, agent, and enabled `ProjectKnowledgeBase` mappings server-side.
