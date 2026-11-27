@@ -14,16 +14,20 @@
   },
   "dependencies": {
     "@resolveai/shared": "*",
+    "argon2": "^0.45.2",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "express": "^5.3.0",
     "express-rate-limit": "^8.7.5",
     "helmet": "^8.3.0",
     "ioredis": "^6.1.0",
+    "jose": "^6.2.18",
     "mongoose": "^9.13.1",
     "pino": "^10.4.0"
   },
   "devDependencies": {
     "@resolveai/config": "*",
+    "@types/cookie-parser": "^1.4.10",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/node": "^20",
