@@ -6,3 +6,8 @@ build
 coverage
 package-lock.json
 *.tsbuildinfo
+
+AGENTS.md
+ANTIGRAVITY_MASTER_PROMPT.md
+IMPLEMENTATION_ROADMAP.md
+PER_FILE_COMMIT_WORKFLOW.md
