@@ -58,6 +58,14 @@ export function unauthenticatedError(message: string = "Authentication required.
   });
 }
 
+export function conflictError(message: string = "Resource already exists."): AppError {
+  return new AppError({
+    code: ERROR_CODES.CONFLICT,
+    message,
+    statusCode: 409,
+  });
+}
+
 export function rateLimitedError(
   message: string = "Too many requests. Please try again later.",
 ): AppError {
