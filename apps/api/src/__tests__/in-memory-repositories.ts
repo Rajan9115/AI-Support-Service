@@ -10,7 +10,9 @@ import type {
   UserRecord,
 } from "../repositories/types.js";
 
-export function createInMemoryRepositories(): CoreRepositories & { auditLogsList: AuditLogInput[] } {
+export function createInMemoryRepositories(): CoreRepositories & {
+  auditLogsList: AuditLogInput[];
+} {
   const users: UserRecord[] = [];
   const sessions: SessionRecord[] = [];
   const organizations: OrganizationRecord[] = [];
@@ -116,7 +118,9 @@ export function createInMemoryRepositories(): CoreRepositories & { auditLogsList
         return record;
       },
       async findMember(organizationId, userId) {
-        return members.find((m) => m.organizationId === organizationId && m.userId === userId) ?? null;
+        return (
+          members.find((m) => m.organizationId === organizationId && m.userId === userId) ?? null
+        );
       },
       async listMembersByUser(userId) {
         return members.filter((m) => m.userId === userId && m.status === "active");
@@ -157,7 +161,9 @@ export function createInMemoryRepositories(): CoreRepositories & { auditLogsList
         return record;
       },
       async findByIdInOrg(organizationId, projectId) {
-        return projects.find((p) => p.id === projectId && p.organizationId === organizationId) ?? null;
+        return (
+          projects.find((p) => p.id === projectId && p.organizationId === organizationId) ?? null
+        );
       },
       async findBySlugInOrg(organizationId, slug) {
         return (
@@ -170,7 +176,9 @@ export function createInMemoryRepositories(): CoreRepositories & { auditLogsList
         return projects.filter((p) => p.organizationId === organizationId);
       },
       async updateByIdInOrg(organizationId, projectId, input) {
-        const found = projects.find((p) => p.id === projectId && p.organizationId === organizationId);
+        const found = projects.find(
+          (p) => p.id === projectId && p.organizationId === organizationId,
+        );
         if (!found) return null;
         if (input.name !== undefined) found.name = input.name;
         if (input.allowedOrigins !== undefined) found.allowedOrigins = input.allowedOrigins;
@@ -207,12 +215,15 @@ export function createInMemoryRepositories(): CoreRepositories & { auditLogsList
         return record;
       },
       async listByProjectInOrg(organizationId, projectId) {
-        return apiKeys.filter((k) => k.organizationId === organizationId && k.projectId === projectId);
+        return apiKeys.filter(
+          (k) => k.organizationId === organizationId && k.projectId === projectId,
+        );
       },
       async findByIdInProject(organizationId, projectId, keyId) {
         return (
           apiKeys.find(
-            (k) => k.id === keyId && k.organizationId === organizationId && k.projectId === projectId,
+            (k) =>
+              k.id === keyId && k.organizationId === organizationId && k.projectId === projectId,
           ) ?? null
         );
       },
