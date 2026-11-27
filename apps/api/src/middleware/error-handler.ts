@@ -19,6 +19,7 @@ function isMalformedJsonError(err: unknown): err is BodyParserSyntaxError {
 
 export function createErrorHandlerMiddleware(logger: Logger) {
   return (err: unknown, req: Request, res: Response, _next: NextFunction): void => {
+    void _next;
     const requestId = req.requestId ?? "unknown";
 
     if (res.headersSent) {
