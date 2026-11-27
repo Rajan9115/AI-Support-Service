@@ -83,7 +83,7 @@ export function createOrganizationRouter(params: {
       const member = await params.organizationService.updateMemberRole(
         req.tenant!.organizationId,
         req.auth!.userId,
-        req.params.memberId!,
+        req.params.memberId as string,
         req.body.role,
         req.requestId,
       );
@@ -99,7 +99,7 @@ export function createOrganizationRouter(params: {
       const member = await params.organizationService.revokeMember(
         req.tenant!.organizationId,
         req.auth!.userId,
-        req.params.memberId!,
+        req.params.memberId as string,
         req.requestId,
       );
       sendSuccess(res, member);
